@@ -1,0 +1,48 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <id>assembly</id>
+    <formats>
+        <format>zip</format><!--打包的文件格式,也可以有：war zip-->
+        <format>dir</format>
+    </formats>
+    <!--tar.gz压缩包下是否生成和项目名相同的根目录-->
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/assembly/conf</directory>
+            <outputDirectory>conf</outputDirectory>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/assembly/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/target/classes</directory>
+            <outputDirectory>conf</outputDirectory>
+            <fileMode>0644</fileMode>
+            <includes>
+                <include>application.yml</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${basedir}/target/</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>lib</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+<!--    <dependencySets>-->
+<!--        <dependencySet>-->
+<!--            <includes>-->
+<!--                <include>fedlearn-business-example.jar</include>-->
+<!--            </includes>-->
+<!--            <outputDirectory>lib</outputDirectory>-->
+<!--        </dependencySet>-->
+<!--    </dependencySets>-->
+</assembly>
